@@ -21,8 +21,4 @@
 - Real-time wearable device vital monitoring  
 - Intelligent conversational AI chatbot  
 - Predictive outcome and resource modeling  
-- Continuous AI learning from patient data  
-
-***
-
-This concise overview captures the core of the platform and its growth potential.
+- Continuous AI learning from patient data
