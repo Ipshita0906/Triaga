@@ -1,0 +1,91 @@
+// App.js
+import React, { useState, useEffect } from "react";
+import HospitalLayout from "./components/HospitalLayout";
+import SymptomStoryboard from "./components/SymptomStoryboard";
+import QueueDashboard from "./components/QueueDashboard";
+import CareNavigatorChatbot from "./components/CareNavigatorChatbot";
+import AdminAnalyticsDashboard from "./components/AdminAnalyticsDashboard";
+import "./App.css";
+
+export default function App() {
+  const [patientQueue, setPatientQueue] = useState([]);
+  const [alerts, setAlerts] = useState([]);
+
+  // Function to add patient with urgent scoring and alert for critical cases
+  const addPatient = (symptoms, vitals) => {
+    const urgencyScore = calculateUrgency(symptoms, vitals);
+    const newPatient = {
+      id: Date.now(),
+      symptoms,
+      vitals,
+      urgencyScore,
+      status: "waiting",
+      arrivalTime: new Date(),
+    };
+    setPatientQueue((prev) =>
+      [...prev, newPatient].sort((a, b) => b.urgencyScore - a.urgencyScore)
+    );
+    if (urgencyScore > 7) {
+      setAlerts((prev) => [
+        ...prev,
+        { id: newPatient.id, message: Critical alert: Patient ${newPatient.id} },
+      ]);
+    }
+  };
+
+  // Mock function considering symptoms and vitals for more realistic scoring
+  const calculateUrgency = (symptoms, vitals) => {
+    let score = 1;
+    if (symptoms.toLowerCase().includes("chest pain")) score += 5;
+    if (vitals.heartRate > 120) score += 3;
+    if (vitals.temperature > 38) score += 2;
+    return Math.min(score, 10);
+  };
+
+  // Function to update patient status (simulate treatment progression)
+  const updateStatus = (patientId, newStatus) => {
+    setPatientQueue((prev) =>
+      prev.map((p) => (p.id === patientId ? { ...p, status: newStatus } : p))
+    );
+    if (newStatus === "treated") {
+      setAlerts((prev) => prev.filter((alert) => alert.id !== patientId));
+    }
+  };
+
+  return (
+    <HospitalLayout>
+      <div className="main-container">
+        <h1>Triaja – AI Hospital Triage & Queue Management</h1>
+
+        <section className="symptom-section">
+          <h2>Interactive Symptom & Vital Input</h2>
+          <SymptomStoryboard onSubmit={addPatient} />
+        </section>
+
+        <section className="alerts-section">
+          <h2>Critical Patient Alerts</h2>
+          {alerts.length === 0 ? (
+            <p>No critical cases at the moment.</p>
+          ) : (
+            alerts.map((alert) => <p key={alert.id} className="alert">{alert.message}</p>)
+          )}
+        </section>
+
+        <section className="queue-section">
+          <h2>Dynamic Queue Dashboard</h2>
+          <QueueDashboard queue={patientQueue} onUpdateStatus={updateStatus} />
+        </section>
+
+        <section className="chatbot-section">
+          <h2>Care Navigator & AI Chatbot</h2>
+          <CareNavigatorChatbot />
+        </section>
+
+        <section className="admin-analytics-section">
+          <h2>Admin Analytics Dashboard</h2>
+          <AdminAnalyticsDashboard queue={patientQueue} />
+        </section>
+      </div>
+    </HospitalLayout>
+  );
+}
