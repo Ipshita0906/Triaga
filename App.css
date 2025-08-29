@@ -1,0 +1,137 @@
+/* App.css */
+body, html {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('https://images.unsplash.com/photo-1588776814546-e6206d84f0fd?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+}
+
+.main-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  max-width: 900px;
+  margin: 20px auto 40px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
+  color: #005f73;
+}
+
+h2 {
+  margin-top: 30px;
+  color: #0a9396;
+}
+
+.symptom-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #90e0ef;
+  resize: vertical;
+  font-size: 1rem;
+}
+
+.symptom-form button {
+  margin-top: 10px;
+  background-color: #0a9396;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.symptom-form button:hover {
+  background-color: #007f7f;
+}
+
+.queue-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.queue-dashboard th, .queue-dashboard td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.chatbot-container {
+  border: 1px solid #005f73;
+  border-radius: 8px;
+  padding: 12px;
+  max-width: 100%;
+  background: #e0fbfc;
+}
+
+.chat-window {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+.chat-message {
+  margin-bottom: 8px;
+  padding: 8px;
+  background: #94d2bd;
+  border-radius: 6px;
+  max-width: 90%;
+}
+
+input[aria-label="Chat message input"] {
+  width: calc(100% - 90px);
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #90e0ef;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #0a9396;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+button:hover {
+  background-color: #007f7f;
+}
+
+/* HospitalLayout.css */
+.hospital-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: rgba(255,255,255,0.8);
+}
+
+.header {
+  background: #005f73;
+  color: white;
+  padding: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer {
+  background: #005f73;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-size: 0.9rem;
+}
